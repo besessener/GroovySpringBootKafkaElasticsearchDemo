@@ -51,6 +51,6 @@ class UserAPI {
     @PostMapping(value = "/add", consumes = "application/json")
     void addUser(
             @Parameter(description = "JSON representation of a User", required=true, schema=@Schema(implementation = User.class)) @RequestBody(required = true) User user) {
-        users.addUser(user.firstName, user.lastName, user.getAge())
+        users.addUser(user)
     }
 }

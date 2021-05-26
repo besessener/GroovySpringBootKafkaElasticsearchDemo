@@ -1,13 +1,17 @@
 package me.spring.GroovyDemo.model
 
+import me.spring.GroovyDemo.stream.KafkaSender
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
 class Users {
+    @Autowired KafkaSender kafkaSender
+
     List<User> users = []
 
-    void addUser(String firstName, String lastName, Integer age) {
-        users.add(new User(firstName, lastName, age))
+    void addUser(user) {
+        kafkaSender.sendUserToStream(user)
     }
 
     List<User> getUsers(String sortBy, String order) {
