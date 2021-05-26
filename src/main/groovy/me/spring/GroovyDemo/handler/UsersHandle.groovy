@@ -1,9 +1,10 @@
-package me.spring.GroovyDemo.model
+package me.spring.GroovyDemo.handler
 
+import me.spring.GroovyDemo.model.User
 import org.springframework.stereotype.Component
 
 @Component
-class Users {
+class UsersHandle {
     List<User> users = []
 
     void addUser(String firstName, String lastName, Integer age) {
