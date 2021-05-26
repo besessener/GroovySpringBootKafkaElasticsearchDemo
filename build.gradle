@@ -26,14 +26,10 @@ repositories {
     gradlePluginPortal()
 }
 
-configurations.all {
-    exclude module: "logback-classic"
-}
-
 dependencies {
-    implementation("org.openapitools:openapi-generator-gradle-plugin:5.1.1")
-    implementation('org.springdoc:springdoc-openapi-groovy:1.5.2')
-    implementation('org.springdoc:springdoc-openapi-ui:1.5.2')
+    implementation("org.openapitools:openapi-generator-gradle-plugin:5.1.1") {
+        exclude module: "slf4j-simple"
+    }
     implementation('org.springframework.boot:spring-boot-starter-data-elasticsearch')
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation 'org.codehaus.groovy:groovy'
