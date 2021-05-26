@@ -1,14 +1,14 @@
 package me.spring.GroovyDemo.stream
 
-
+import me.spring.GroovyDemo.AppConstants
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
 class KafkaListeners {
 
-    @KafkaListener(topics = "my-sample-topic", groupId = "UserGroup")
+    @KafkaListener(topics = AppConstants.KAFKA_TOPIC_USER, groupId = AppConstants.KAFKA_GROUP_USER)
     void listenGroupFoo(String message) {
-        println("Received Message in group UserGroup: " + message)
+        println("Received Message in group ${AppConstants.KAFKA_GROUP_USER}: " + message)
     }
 }

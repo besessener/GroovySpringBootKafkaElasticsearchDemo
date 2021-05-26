@@ -1,5 +1,6 @@
 package me.spring.GroovyDemo.stream
 
+import me.spring.GroovyDemo.AppConstants
 import me.spring.GroovyDemo.model.User
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
@@ -15,24 +16,23 @@ import org.springframework.kafka.support.serializer.JsonDeserializer
 @Configuration
 class KafkaConsumerConfig {
 
-    private String bootstrapServers = 'localhost:2020'
-
     @Bean
-    ConsumerFactory<String, String> consumerFactory() {
+    ConsumerFactory<String, User> consumerFactory() {
         Map<String, Object> props = new HashMap<>()
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                bootstrapServers)
+                AppConstants.KAFKA_BOOTSTRAP_SERVER)
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
-                'UserGroup')
+                AppConstants.KAFKA_GROUP_USER)
         props.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class)
         props.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                new JsonDeserializer<>(User.class).class)
-        return new DefaultKafkaConsumerFactory<>(props);
+                JsonDeserializer.class)
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+        return new DefaultKafkaConsumerFactory<>(props)
     }
 
     @Bean
