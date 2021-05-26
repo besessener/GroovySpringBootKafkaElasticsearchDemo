@@ -1,12 +1,14 @@
-package me.spring.GroovyDemo.model
+package me.spring.GroovyDemo.handler
 
+import me.spring.GroovyDemo.model.User
 import me.spring.GroovyDemo.stream.KafkaSender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class Users {
-    @Autowired KafkaSender kafkaSender
+class UsersHandle {
+    @Autowired
+    KafkaSender kafkaSender
 
     List<User> users = []
 
@@ -15,7 +17,7 @@ class Users {
     }
 
     List<User> getUsers(String sortBy, String order) {
-        def sortedUsers = users.sort{it."$sortBy"}
+        def sortedUsers = users.sort { it."$sortBy" }
         if (order.toLowerCase() == 'dsc') {
             sortedUsers = sortedUsers.reverse()
         }

@@ -1,4 +1,4 @@
-package me.spring.GroovyDemo
+package me.spring.GroovyDemo.api
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 
 import me.spring.GroovyDemo.model.User
-import me.spring.GroovyDemo.model.Users
+import me.spring.GroovyDemo.handler.UsersHandle
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*
 class UserAPI {
 
     @Autowired
-    Users users
+    UsersHandle users
 
     @Operation(summary = "Return list of all users")
     @ApiResponses([@ApiResponse(responseCode = "200", description = "Users successfully retrieved", content = [
