@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UsersHandle {
+class UsersHandler {
     @Autowired
     KafkaSender kafkaSender
 
     List<User> users = []
 
-    void addUser(user) {
+    void callApiAddUser(user) {
         kafkaSender.sendUserToStream(user)
     }
 
-    List<User> getUsers(String sortBy, String order) {
+    List<User> callApiGetAllUsers(String sortBy, String order) {
         def sortedUsers = users.sort { it."$sortBy" }
         if (order.toLowerCase() == 'dsc') {
             sortedUsers = sortedUsers.reverse()
@@ -25,7 +25,11 @@ class UsersHandle {
         sortedUsers
     }
 
-    User getUserByLastName(String lastName) {
+    User callApiGetUserByLastName(String lastName) {
         users.find { it.getLastName() == lastName }
+    }
+
+    void storeUserInElastic(User user) {
+        println user.toString()
     }
 }
