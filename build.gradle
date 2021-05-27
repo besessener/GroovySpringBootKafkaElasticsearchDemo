@@ -35,11 +35,12 @@ dependencies {
     implementation('org.springframework.data:spring-data-elasticsearch')
     implementation('org.elasticsearch:elasticsearch')
     implementation('org.elasticsearch.client:elasticsearch-rest-high-level-client')
+    implementation('org.springframework:spring-webflux')
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.codehaus.groovy:groovy')
-    implementation 'org.springframework.kafka:spring-kafka'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    implementation('org.springframework.kafka:spring-kafka')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.kafka:spring-kafka-test')
 }
 
 test {
@@ -70,6 +71,7 @@ task openApiGroovy(type: org.openapitools.generator.gradle.plugin.tasks.Generate
     outputDir = "$buildDir/generated/sources".toString()
 }
 
+bootRun.dependsOn(['openApiGenerate', 'openApiGroovy'])
 build.dependsOn(['openApiGenerate', 'openApiGroovy'])
 tasks.openApiGenerate.dependsOn('generateOpenApiDocs')
 tasks.openApiGroovy.dependsOn('generateOpenApiDocs')
