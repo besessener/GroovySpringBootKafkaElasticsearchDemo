@@ -32,10 +32,11 @@ dependencies {
     }
     implementation('org.springdoc:springdoc-openapi-groovy:1.5.2')
     implementation('org.springdoc:springdoc-openapi-ui:1.5.2')
-    implementation('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+    implementation('org.springframework.data:spring-data-elasticsearch')
+    implementation('org.elasticsearch:elasticsearch')
+    implementation('org.elasticsearch.client:elasticsearch-rest-high-level-client')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation 'org.apache.kafka:kafka-streams'
-    implementation 'org.codehaus.groovy:groovy'
+    implementation('org.codehaus.groovy:groovy')
     implementation 'org.springframework.kafka:spring-kafka'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'

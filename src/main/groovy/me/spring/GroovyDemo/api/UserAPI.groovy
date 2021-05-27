@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 
 import me.spring.GroovyDemo.model.User
-import me.spring.GroovyDemo.handler.UsersHandle
+import me.spring.GroovyDemo.handler.UsersHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*
 class UserAPI {
 
     @Autowired
-    UsersHandle users
+    UsersHandler users
 
     @Operation(summary = "Return list of all users")
     @ApiResponses([@ApiResponse(responseCode = "200", description = "Users successfully retrieved", content = [
@@ -31,7 +31,7 @@ class UserAPI {
     List<User> allUsers(
             @Parameter(description = "Define by which value you want to sort.") @RequestParam(required = false, defaultValue = 'id') String sortBy,
             @Parameter(description = "Define whether to sort ascending ('asc') or descending ('dsc')") @RequestParam(required = false, defaultValue = 'asc') String order) {
-        users.getUsers(sortBy, order)
+        users.callApiGetAllUsers(sortBy, order)
     }
 
     @Operation(summary = "Get specific user by last name")
@@ -42,7 +42,7 @@ class UserAPI {
     ])
     @GetMapping("/{lastName}")
     ResponseEntity<User> userById(@PathVariable() String lastName) {
-        def user = users.getUserByLastName(lastName)
+        def user = users.callApiGetUserByLastName(lastName)
         new ResponseEntity<>(user, user ? HttpStatus.OK : HttpStatus.NOT_FOUND)
     }
 
@@ -51,6 +51,6 @@ class UserAPI {
     @PostMapping(value = "/add", consumes = "application/json")
     void addUser(
             @Parameter(description = "JSON representation of a User", required=true, schema=@Schema(implementation = User.class)) @RequestBody(required = true) User user) {
-        users.addUser(user.firstName, user.lastName, user.getAge())
+        users.callApiAddUser(user)
     }
 }
