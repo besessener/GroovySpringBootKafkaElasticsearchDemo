@@ -29,8 +29,8 @@ class UserAPI {
             @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))])])
     @GetMapping("/all")
     List<User> allUsers(
-            @Parameter(description = "Define by which value you want to sort.") @RequestParam(required = false, defaultValue = 'id') String sortBy,
-            @Parameter(description = "Define whether to sort ascending ('asc') or descending ('dsc')") @RequestParam(required = false, defaultValue = 'asc') String order) {
+            @Parameter(description = "Define by which value you want to sort.") @RequestParam(required = false, defaultValue = 'insertDate') String sortBy,
+            @Parameter(description = "Define whether to sort ascending ('asc') or descending ('desc')") @RequestParam(required = false, defaultValue = 'asc') String order) {
         users.callApiGetAllUsers(sortBy, order)
     }
 
@@ -41,7 +41,7 @@ class UserAPI {
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content)
     ])
     @GetMapping("/{lastName}")
-    ResponseEntity<User> userById(@PathVariable() String lastName) {
+    ResponseEntity<User> userByLastName(@PathVariable() String lastName) {
         def user = users.callApiGetUserByLastName(lastName)
         new ResponseEntity<>(user, user ? HttpStatus.OK : HttpStatus.NOT_FOUND)
     }
