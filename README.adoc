@@ -1,0 +1,51 @@
+= Spring Boot demo in Groovy
+
+featuring:
+
+* easy Http GET and POST routes
+* OpenApi (annotation usage, doc generation, groovy client generation)
+* Swagger UI
+* Kafka stream
+* Elasticsearch store and read
+
+== Setup
+
+. Get Gradle 6.8.x or newer (Gradle wrapper is configured for 7.0.2)
+. Zookeeper
+.. download (https://zookeeper.apache.org/releases.html#download)
+.. execute ()
+
+    cd ~/kafka_2.12-2.2.2/bin
+    ./zookeeper-server-start.sh ../config/zookeeper.properties
+
+. Kafka
+.. Download Kafka (https://kafka.apache.org/downloads)
+.. execute
+
+    cd ~/kafka_2.12-2.2.2/bin
+    ./kafka-server-start.sh ../config/server.properties
+
+.. add topic
+
+    ~/event-streaming-run/scripts$ export KAFKA_HOME=/home/vagrant/kafka_2.12-2.2.2/
+    cd ~/event-streaming-run/scripts
+    . ./localKafka.sh
+    ./createTopic.sh topic-user 0   # this topic is configured in AppConstants.groovy as well
+    ./showTopics.sh  # optional to see that it worked
+
+. Elasticsearch
+.. download (https://www.elastic.co/downloads/elasticsearch, be aware that latest version _might_ not work with spring-data-elasticsearch: I use 7.12.1)
+.. execute
+
+    cd ~/elasticsearch/elasticsearch-7.12.1/bin
+    ./elasticsearch
+
+== Execution
+
+Either run the `GroovyDemoApplication` from within IntelliJ or run `./gradlew bootRun` in your shell to start the application. The gradle option has the nice benefit of  also generating API docs and client side API classes.
+
+== Access
+
+`localhost:8080` will open Swagger UI. There you will see all access possibilities. The rest of the routes are, as you might see, under: `localhost:8080/users/*`
+
+With `localhost:9200/user` you can access the Elasticsearch index that is used to store and read data (directly, defined in AppConstants.groovy).
