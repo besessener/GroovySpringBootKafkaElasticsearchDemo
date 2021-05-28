@@ -8,6 +8,8 @@ featuring:
 * Kafka stream
 * Elasticsearch store and read
 
+The service will accept new User objects as JSON via Http POST. This new user will then be put onto the Kafka stream ('topic-user' topic) to allow asynchronuous processing of it. POST will almost immediately respond to the client. The Kafka Listener on the other side will then trigger on every new incoming user and write it into Elasticsearch ('user' index). All GET methods will then directly fetch from Elasticsearch to return the requested results.
+
 == Setup
 
 . Get Gradle 6.8.x or newer (Gradle wrapper is configured for 7.0.2)
