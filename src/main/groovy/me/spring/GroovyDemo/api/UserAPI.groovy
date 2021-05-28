@@ -34,6 +34,14 @@ class UserAPI {
         users.callApiGetAllUsers(sortBy, order)
     }
 
+    @Operation(summary = "Return a special user")
+    @ApiResponses([@ApiResponse(responseCode = "200", description = "User successfully retrieved", content = [
+            @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))])])
+    @GetMapping("/special")
+    User specialUser() {
+        users.callApiGetSpecialUser()
+    }
+
     @Operation(summary = "Get specific user by last name")
     @ApiResponses([
             @ApiResponse(responseCode = "200", description = "User successfully retrieved", content = [

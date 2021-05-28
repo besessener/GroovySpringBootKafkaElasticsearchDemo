@@ -31,4 +31,8 @@ class UsersHandler {
     User callApiGetUserByLastName(String lastName) {
         elasticsearchUserRepository.findByLastName(lastName)
     }
+
+    User callApiGetSpecialUser() {
+        elasticsearchUserRepository.findSpecial()
+    }
 }
