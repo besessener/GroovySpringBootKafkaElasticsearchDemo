@@ -29,8 +29,8 @@ The service will accept new User objects as JSON via Http POST. This new user wi
 
 .. add topic
 
-    ~/event-streaming-run/scripts$ export KAFKA_HOME=/home/vagrant/kafka_2.12-2.2.2/
-    cd ~/event-streaming-run/scripts
+    export KAFKA_HOME=/home/vagrant/kafka_2.12-2.2.2/
+    cd ~/convenienceScripts  # special scripts, just create a topic
     . ./localKafka.sh
     ./createTopic.sh topic-user 0   # this topic is configured in AppConstants.groovy as well
     ./showTopics.sh  # optional to see that it worked
