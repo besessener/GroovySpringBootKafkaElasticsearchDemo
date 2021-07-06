@@ -41,10 +41,9 @@ dependencies {
     implementation('org.springframework.kafka:spring-kafka')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.kafka:spring-kafka-test')
-}
-
-test {
-    useJUnitPlatform()
+    testImplementation('org.codehaus.groovy:groovy')
+    testImplementation('org.spockframework:spock-core:2.0-groovy-3.0')
+    testImplementation(group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0')
 }
 
 openApi {
@@ -66,9 +65,9 @@ openApiGenerate {
 }
 
 task openApiGroovy(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
-    generatorName = "groovy"
+    generatorName = "python"
     inputSpec = "$buildDir/generated/docs/api-definition.yaml".toString()
-    outputDir = "$buildDir/generated/sources".toString()
+    outputDir = "$buildDir/generated/sources-py".toString()
 }
 
 bootRun.dependsOn(['openApiGenerate', 'openApiGroovy'])

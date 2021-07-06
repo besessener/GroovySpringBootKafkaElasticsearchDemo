@@ -13,7 +13,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback
 class KafkaSender {
 
     @Autowired
-    private KafkaTemplate<String, User> kafkaTemplate;
+    private KafkaTemplate<String, User> kafkaTemplate
 
     void sendUserToStream(User user) {
         ListenableFuture<SendResult<String, User>> future = kafkaTemplate.send(AppConstants.KAFKA_TOPIC_USER, user)
@@ -27,6 +27,6 @@ class KafkaSender {
             void onFailure(Throwable ex) {
                 println("Unable to send message=[" + user + "] due to : " + ex.getMessage())
             }
-        });
+        })
     }
 }
