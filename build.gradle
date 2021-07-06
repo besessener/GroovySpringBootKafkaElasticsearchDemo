@@ -44,6 +44,7 @@ dependencies {
     testImplementation('org.codehaus.groovy:groovy')
     testImplementation('org.spockframework:spock-core:2.0-groovy-3.0')
     testImplementation(group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0')
+    testImplementation(group: 'org.codehaus.groovy', name: 'groovy-json', version: '3.0.8')
 }
 
 openApi {
