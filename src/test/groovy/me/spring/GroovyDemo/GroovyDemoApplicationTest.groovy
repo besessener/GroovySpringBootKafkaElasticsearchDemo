@@ -32,9 +32,4 @@ class GroovyDemoApplicationTest extends Specification {
             kafkaTemplate
             users
     }
-
-    def "fail for github"() {
-        expect:
-            false
-    }
 }
