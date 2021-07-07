@@ -13,20 +13,23 @@ import spock.lang.Specification
 @SpringBootTest(classes = GroovyDemoApplication.class)
 class GroovyDemoApplicationTest extends Specification {
 
-    @SpringBean
-    ElasticsearchUserRepository elasticsearchUserRepository = Mock()
+    @Autowired(required = false)
+    ElasticsearchUserRepository elasticsearchUserRepository
 
-    @SpringBean
-    KafkaSender kafkaSender = Mock()
+    @Autowired(required = false)
+    KafkaSender kafkaSender
 
-    @SpringBean
-    private KafkaTemplate<String, User> kafkaTemplate = Mock()
+    @Autowired(required = false)
+    private KafkaTemplate<String, User> kafkaTemplate
 
     @Autowired(required = false)
     UsersHandler users
 
     def "when context is loaded then all expected beans are created"() {
         expect:
+            elasticsearchUserRepository
+            kafkaSender
+            kafkaTemplate
             users
     }
 }
