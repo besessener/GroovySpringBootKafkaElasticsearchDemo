@@ -47,6 +47,12 @@ dependencies {
     testImplementation(group: 'org.codehaus.groovy', name: 'groovy-json', version: '3.0.8')
 }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
 openApi {
     outputDir.set(file("$buildDir/generated/docs"))
     outputFileName.set("api-definition.yaml")
