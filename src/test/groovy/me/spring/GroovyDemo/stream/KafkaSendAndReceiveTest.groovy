@@ -45,7 +45,7 @@ class KafkaSendAndReceiveTest extends Specification {
 
         then:
             conditions.eventually {
-                buffer.toString().contains("Sent message=[me.spring.GroovyDemo.model.User(123, Thu Jan 01 01:00:00 CET 1970, null, null, null)] with offset=[0]")
+                assertTrue buffer.toString().contains("Sent message=[me.spring.GroovyDemo.model.User(123, Thu Jan 01 01:00:00 CET 1970, null, null, null)] with offset=[0]")
             }
 
             conditions.eventually {
