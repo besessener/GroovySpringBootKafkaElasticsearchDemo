@@ -5,13 +5,11 @@ import me.spring.GroovyDemo.GroovyDemoApplication
 import me.spring.GroovyDemo.handler.UsersHandler
 import me.spring.GroovyDemo.model.User
 import me.spring.GroovyDemo.store.ElasticsearchUserRepository
-import me.spring.GroovyDemo.stream.KafkaSender
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -81,9 +79,9 @@ class UserAPITest extends Specification {
         when:
             def apiCall = mvc.perform(
                     post('/users/add')
-                        .content(new JsonBuilder(user).toPrettyString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
+                            .content(new JsonBuilder(user).toPrettyString())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .accept(MediaType.APPLICATION_JSON))
 
         then:
             apiCall.andExpect(status().isOk())

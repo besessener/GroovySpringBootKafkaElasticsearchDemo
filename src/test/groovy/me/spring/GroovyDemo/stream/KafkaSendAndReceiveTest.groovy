@@ -34,12 +34,11 @@ class KafkaSendAndReceiveTest extends Specification {
 
         when:
             kafkaSender.sendUserToStream(user)
-            sleep(5000)
+            sleep(5 * 1000)
 
         then:
             buffer.toString().contains("Sent message=[me.spring.GroovyDemo.model.User(123, Thu Jan 01 01:00:00 CET 1970, null, null, null)] with offset=[0]")
             buffer.toString().contains("Received message=[me.spring.GroovyDemo.model.User(123, Thu Jan 01 01:00:00 CET 1970, null, null, null)]")
-            1 * users.storeUserInElastic(user)
     }
 
 }
