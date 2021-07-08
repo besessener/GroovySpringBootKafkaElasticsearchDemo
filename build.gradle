@@ -55,6 +55,7 @@ test {
         outputs.upToDateWhen {false}
         showStandardStreams = true
     }
+    exclude "**/Kafka**"
 }
 
 openApi {
