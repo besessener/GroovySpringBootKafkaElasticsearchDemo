@@ -14,6 +14,7 @@ class KafkaListeners {
 
     @KafkaListener(topics = AppConstants.KAFKA_TOPIC_USER, groupId = AppConstants.KAFKA_GROUP_USER)
     void listenGroupUser(User user) {
+        println("Received message=[" + user + "]")
         users.storeUserInElastic(user)
     }
 }

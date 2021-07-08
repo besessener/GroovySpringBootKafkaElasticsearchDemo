@@ -30,12 +30,6 @@ class UserAPITest extends Specification {
     @SpringBean
     ElasticsearchUserRepository elasticsearchUserRepository = Mock()
 
-    @SpringBean
-    KafkaSender kafkaSender = Mock()
-
-    @SpringBean
-    private KafkaTemplate<String, User> kafkaTemplate = Mock()
-
     @Autowired
     private MockMvc mvc
 
